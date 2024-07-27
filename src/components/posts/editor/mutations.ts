@@ -53,7 +53,7 @@ export default function useSubmitPostMutation() {
       });
 
       toast({
-        description: "Post c reated",
+        description: "Post created",
       });
     },
     onError(error) {
