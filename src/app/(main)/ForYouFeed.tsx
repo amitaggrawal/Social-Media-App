@@ -29,7 +29,7 @@ export default function ForYouFeed() {
     initialPageParam: null as string | null,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
-  //response type data={pages:[{posts:[], nextCursor:''}]}
+  //response type data={pages:[{posts:[], nextCursor:''}], pageParams}
   const posts = data?.pages.flatMap((page) => page.posts) || [];
 
   if (status === "pending") {
