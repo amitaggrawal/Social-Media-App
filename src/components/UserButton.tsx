@@ -21,17 +21,17 @@ import { logout } from "@/app/(auth)/actions";
 import { useTheme } from "next-themes";
 
 interface UserButtonProps {
-  classname?: string;
+  className?: string;
 }
 
-export default function UserButton({ classname }: UserButtonProps) {
+export default function UserButton({ className }: UserButtonProps) {
   const { user } = useSession();
   const { theme, setTheme } = useTheme();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className={cn("flex-none rounded-full", classname)}>
+        <button className={cn("flex-none rounded-full", className)}>
           <UserAvatar avatarURL={user.avatarUrl} size={40} />
         </button>
       </DropdownMenuTrigger>
@@ -54,7 +54,7 @@ export default function UserButton({ classname }: UserButtonProps) {
               <DropdownMenuItem onClick={() => setTheme("system")}>
                 <Monitor className="mr-2 size-4" />
                 System Theme
-                {theme === "system" && <Check className="ms -2 size-4" />}
+                {theme === "system" && <Check className="ms-2 size-4" />}
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setTheme("light")}>
                 <Sun className="mr-2 size-4" />

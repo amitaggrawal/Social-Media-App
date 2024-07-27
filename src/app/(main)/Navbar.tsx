@@ -10,7 +10,7 @@ export default function Navbar() {
           MyBook
         </Link>
         <SearchField />
-        <UserButton classname="sm:ms-auto" />
+        <UserButton className="sm:ms-auto" />
       </div>
     </header>
   );
