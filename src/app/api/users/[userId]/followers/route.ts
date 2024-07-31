@@ -14,9 +14,7 @@ export async function GET(
     }
 
     const user = await prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
+      where: { id: userId },
       select: {
         followers: {
           where: {
@@ -35,16 +33,17 @@ export async function GET(
     });
 
     if (!user) {
-      return Response.json({ error: "User not found" }, { status: 401 });
+      return Response.json({ error: "User not found" }, { status: 404 });
     }
 
     const data: FollowerInfo = {
       followers: user._count.followers,
       isFollowedByUser: !!user.followers.length,
     };
-    return Response.json(data, { status: 200 });
+
+    return Response.json(data);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return Response.json({ error: "Internal server error" }, { status: 500 });
   }
 }
@@ -76,7 +75,7 @@ export async function POST(
 
     return new Response();
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return Response.json({ error: "Internal server error" }, { status: 500 });
   }
 }
@@ -101,7 +100,7 @@ export async function DELETE(
 
     return new Response();
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return Response.json({ error: "Internal server error" }, { status: 500 });
   }
 }

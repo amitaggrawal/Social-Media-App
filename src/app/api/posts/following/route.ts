@@ -1,6 +1,6 @@
 import { validateRequest } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { PostsPage, getPostDataInclude } from "@/lib/types";
+import { getPostDataInclude, PostsPage } from "@/lib/types";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -30,6 +30,7 @@ export async function GET(req: NextRequest) {
       cursor: cursor ? { id: cursor } : undefined,
       include: getPostDataInclude(user.id),
     });
+
     const nextCursor = posts.length > pageSize ? posts[pageSize].id : null;
 
     const data: PostsPage = {

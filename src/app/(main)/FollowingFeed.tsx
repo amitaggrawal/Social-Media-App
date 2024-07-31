@@ -3,10 +3,9 @@
 import InfiniteScrollContainer from "@/components/InfiniteScrollContainer";
 import Post from "@/components/posts/Post";
 import PostsLoadingSkeleton from "@/components/posts/PostsLoadingSkeleton";
-import { Button } from "@/components/ui/button";
 import kyInstance from "@/lib/ky";
-import { PostData, PostsPage } from "@/lib/types";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { PostsPage } from "@/lib/types";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 
 export default function FollowingFeed() {
@@ -29,7 +28,7 @@ export default function FollowingFeed() {
     initialPageParam: null as string | null,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
-  //response type data={pages:[{posts:[], nextCursor:''}], pageParams}
+
   const posts = data?.pages.flatMap((page) => page.posts) || [];
 
   if (status === "pending") {
@@ -39,7 +38,7 @@ export default function FollowingFeed() {
   if (status === "success" && !posts.length && !hasNextPage) {
     return (
       <p className="text-center text-muted-foreground">
-        No post found. Start following people to see their post here.
+        No posts found. Start following people to see their posts here.
       </p>
     );
   }
@@ -47,7 +46,7 @@ export default function FollowingFeed() {
   if (status === "error") {
     return (
       <p className="text-center text-destructive">
-        An error occured while loading posts.
+        An error occurred while loading posts.
       </p>
     );
   }
